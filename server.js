@@ -11,7 +11,7 @@ app.use(cookieParser());
 app.use(cors());
 app.use(fileUpload({
   useTempFiles: true
-}))
+}));
 
 // Connect to mongodb
 const URI = process.env.MONGODB_URL;
@@ -23,11 +23,10 @@ mongoose.connect(URI, {
 }, err => {
   if (err) throw err;
   console.log('connected to mongodb')
-})
+});
 
-app.get('/', (req, res) => {
-  res.json({msg: "Welcome to e-mern"});
-})
+// Routes
+app.use('/user', require('./routes/userRouter'));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
