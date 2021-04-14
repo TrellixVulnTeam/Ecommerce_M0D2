@@ -25,14 +25,12 @@ const userController = {
       const accesstoken = createAccessToken({id: newUser._id})
       const refreshtoken = createRefreshToken({id: newUser._id})
 
-      console.log({accesstoken, refreshtoken})
-
       res.cookie('refreshtoken', refreshtoken, {
         httpOnly: true,
         path: '/user/refresh_token'
       })
 
-      res.json({refreshtoken})
+      res.json({accesstoken})
     } catch (err) {
       return res.status(500).json({msg: err.message})
     }
